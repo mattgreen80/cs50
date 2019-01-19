@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Applications
+{% endblock %}
+
+{% block main %}
+
+<br>
+<div class="container">
+<br><br>
+<table class="table table-bordered">
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">VehicleID</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">City</th>
+        <th scope="col">Date of birth</th>
+        <th scope="col">Licence</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Occupation</th>
+    </tr>
+    {% for row in result %}
+    <tr>
+        <td>{{ result[loop.index0]["id"] }}</td>
+        <td>{{ result[loop.index0]["vehicleid"] }}</td>
+        <td>{{ result[loop.index0]["first_name"] }}</td>
+        <td>{{ result[loop.index0]["last_name"] }}</td>
+        <td>{{ result[loop.index0]["email"] }}</td>
+        <td>{{ result[loop.index0]["city"] }}</td>
+        <td>{{ result[loop.index0]["dob"] }}</td>
+        <td>{{ result[loop.index0]["licence"] }}</td>
+        <td>{{ result[loop.index0]["phone"] }}</td>
+        <td>{{ result[loop.index0]["occupation"] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<br><br>
+</div>
+
+<div class="container">
+<h3 class="text-center">Delete an application</h3>
+
+<form action="/applications" method="post" class="form-inline">
+    <div class="form-group">
+    <label for="row">Row id:</label>
+    <select class="form-control" name="row" id="row">
+        <option value="..." id="remove">...</option>
+        {% for item in result %}
+        <option value="{{ result[loop.index0]["id"] }}" id="row">{{ result[loop.index0]["id"] }}</option>
+        {% endfor %}
+    </select>
+    </div>
+    <button class="btn btn-default" type="submit">Remove</button>
+</form>
+<br>
+</div>
+
+{% endblock %}

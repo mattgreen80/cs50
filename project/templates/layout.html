@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <!-- bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- local styles -->
+        <link href="./static/styles.css" rel="stylesheet"/>
+        <!-- http://jquery.com/ bootsrap requires this, so does local scripts-->
+        <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+        <!-- bootstrap -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
+        <!-- google map -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNlrkAqHOkufYyqCwVXTWQbzbKHRtOgDs"></script>
+        <!-- local javascript -->
+        <script src="/static/scripts.js"></script>
+
+
+
+        <title>CreditCar: {% block title %}{% endblock %}</title>
+
+    </head>
+
+    <body>
+            <div class="logo">
+            <img class="img-responsive" src="./static/logomain.png" alt="Creditcar Logo">
+            </div>
+
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">
+                        <img style="margin-top: -9px;" src="./static/logosmall.png" width="70" height="40" alt="">
+                    </a>
+                </div>
+                {% if session.user_id %}
+                <ul class="nav navbar-nav">
+                    <li><a href="/">Vehicles</a></li>
+                    <li><a href="/finance">Finance</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/vehicles">Manage Stock</a></li>
+                    <li><a href="/applications">Manage Finance</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+                </ul>
+                {% else %}
+                <ul class="nav navbar-nav">
+                    <li><a href="/">Vehicles</a></li>
+                    <li><a href="/finance">Finance</a></li>
+                    <li><a href="/about">About</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/register"><span class="glyphicon glyphicon-user"></span> Dealer Register</a></li>
+                    <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Dealer Login</a></li>
+                </ul>
+                {% endif %}
+            </div>
+        </nav>
+
+
+
+        {% if get_flashed_messages() %}
+            <header>
+                <div class="alert alert-primary border text-center" role="alert" style="color:Red;">
+                    {{ get_flashed_messages() | join(" ") }}
+                </div>
+            </header>
+        {% endif %}
+
+        <main>
+            {% block main %}{% endblock %}
+        </main>
+
+    </body>
+
+</html>

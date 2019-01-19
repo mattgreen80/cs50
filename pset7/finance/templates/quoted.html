@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quote
+{% endblock %}
+
+{% block main %}
+    <h1 class="display-4">Stock quote</h1>
+    <br>
+    <table class="table table-bordered">
+        <tr>
+            <th scope="row" colspan="3">Symbol</th>
+            <td>{{ quote["symbol"] }}</td>
+        </tr>
+        <tr>
+            <th scope="row" colspan="3">Name</th>
+            <td>{{ quote["name"] }}</td>
+        </tr>
+        <tr>
+            <th scope="row" colspan="3">Price</th>
+            <td>{{ price }}</td>
+        </tr>
+    </table>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Summary
+{% endblock %}
+
+{% block main %}
+    <h1 class="display-4">Stock summary for {{ name[0]["username"] }}</h1>
+    <br>
+    <table class="table table-bordered">
+        {# this is comment syntax for jinja #}
+        <tr>
+            <th scope="col">Stock owned</th>
+            <th scope="col">Shares owned</th>
+            <th scope="col">Current price</th>
+            <th scope="col">Total value</th>
+        </tr>
+        {% for share in shares %}
+        {# check to see if there is a quantity of shares present (to stop a table entry with 0 shares listed #}
+        {% if shares[loop.index0]["SUM(quantity)"] > 0 %}
+        <tr>
+            <td>{{ shares[loop.index0]["name"] }}</td>
+            <td>{{ shares[loop.index0]["SUM(quantity)"] }}</td>
+            <td>{{ usd(price[loop.index0]) }}</td>
+            <td>{{ usd(price[loop.index0]*shares[loop.index0]["SUM(quantity)"]) }}</td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </table>
+    <br>
+    <table class="table table-bordered">
+        <tr>
+            <th scope="row" colspan="3">Current cash</th>
+            <td>{{ usd(cash[0]["cash"]) }}</td>
+        </tr>
+        <tr>
+            <th scope="row" colspan="3">Total worth</th>
+            <td>{{ usd(total) }}</td>
+        </tr>
+    </table>
+    <br>
+        <form action="/" method="post">
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="add" placeholder="Enter amount" type="text"/>
+        </div>
+        <button class="btn btn-primary" type="submit">Add cash</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Vehicles
+{% endblock %}
+
+{% block main %}
+
+<div class="container">
+<h3 class="text-center">Search vehicles</h3>
+
+<form action="/" method="post" class="form-inline">
+    <div class="form-group">
+    <label for="make">Make:</label>
+    <select class="form-control" name="make" id="make" onchange="this.form.submit()">
+        <option value="..." id="make">...</option>
+        {% for item in make %}
+        <option value="{{ make[loop.index0]["make"] }}" id="make">{{ make[loop.index0]["make"] }}</option>
+        {% endfor %}
+    </select>
+    </div>
+    <div class="form-group">
+    <label for="make">Model:</label>
+    <select class="form-control" name="model" id="model" onchange="this.form.submit()">
+        <option value="..." id="make">...</option>
+        {% for item in model %}
+        <option value="{{ model[loop.index0]["model"] }}">{{ model[loop.index0]["model"] }}</option>
+        {% endfor %}
+    </select>
+    </div>
+    <div class="form-group">
+    <label for="year">Year:</label>
+    <select class="form-control" name="year" id="year" onchange="this.form.submit()">
+        <option value="..." id="year">...</option>
+        {% for item in year %}
+        <option value="{{ year[loop.index0]["year"] }}">{{ year[loop.index0]["year"] }}</option>
+        {% endfor %}
+    </select>
+    </div>
+    <div class="form-group">
+    <label for="reg">Registration:</label>
+    <select class="form-control" name="reg" id="reg" onchange="this.form.submit()">
+        <option value="..." id="reg">...</option>
+        {% for item in reg %}
+        <option value="{{ reg[loop.index0]["reg"] }}">{{ reg[loop.index0]["reg"] }}</option>
+        {% endfor %}
+    </select>
+    </div>
+</form>
+<br>
+</div>
+
+<br>
+
+<div class="container">
+<br><br>
+<table class="table table-bordered">
+    <tr>
+        <th scope="col">Make</th>
+        <th scope="col">Model</th>
+        <th scope="col">Registration</th>
+        <th scope="col">Year</th>
+        <th scope="col">Kms</th>
+        <th scope="col">Price</th>
+    </tr>
+    {% for row in result %}
+    <tr>
+        <td>{{ result[loop.index0]["make"] }}</td>
+        <td>{{ result[loop.index0]["model"] }}</td>
+        <td>{{ result[loop.index0]["reg"] }}</td>
+        <td>{{ result[loop.index0]["year"] }}</td>
+        <td>{{ result[loop.index0]["kms"] }}</td>
+        <td>${{ result[loop.index0]["price"] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<br>
+<button type="button" class="btn btn-default" onClick="location.href=location.href">Clear results</button>
+<br>
+<br>
+</div>
+
+{% endblock %}

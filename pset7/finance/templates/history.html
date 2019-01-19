@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    <h1 class="display-4">Transaction history for {{ name[0]["username"] }}</h1>
+    <br>
+    <table class="table table-bordered">
+        {# this is comment syntax for jinja #}    
+        <tr>
+            <th scope="col">Transaction ID</th>
+            <th scope="col">Transaction type</th>
+            <th scope="col">Symbol</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Date and time</th>
+        </tr>
+        {% for row in hist %} 
+        <tr>
+            <td>{{ hist[loop.index0]["transactid"] }}</td>
+            {% if hist[loop.index0]["quantity"] > 0 %}
+                <td>{{ "Buy" }}</td>
+            {% else %}
+                <td>{{ "Sell" }}</td>
+            {% endif %}
+            <td>{{ hist[loop.index0]["name"] }}</td>
+            <td>${{ hist[loop.index0]["price"] }}</td>
+            <td>{{ hist[loop.index0]["quantity"] }}</td>
+            <td>{{ hist[loop.index0]["date"] }}</td>
+        </tr>
+        {% endfor %}
+    </table> 
+{% endblock %}
